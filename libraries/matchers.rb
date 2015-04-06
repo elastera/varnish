@@ -3,6 +3,10 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:varnish_install, :install, resource_name)
   end
 
+  def enable_varnish_instance(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:varnish_instance, :enable, resource_name)
+  end
+
   def configure_varnish_service(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:varnish_default_config, :configure, resource_name)
   end
