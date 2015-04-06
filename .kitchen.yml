@@ -66,3 +66,9 @@ suites:
     - centos-6.5
   run_list:
     - recipe[install_varnish::vendor_install]
+
+- name: install_without_service
+  includes:
+    - centos-6.5
+  run_list:
+    - recipe[install_varnish::install_without_service]

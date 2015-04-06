@@ -10,6 +10,7 @@ class Chef
       attribute :package_name, kind_of: String, default: 'varnish'
       attribute :vendor_repo, kind_of: [TrueClass, FalseClass], default: false
       attribute :vendor_version, kind_of: String, default: '4.0'
+      attribute :no_default_service, kind_of: [TrueClass, FalseClass], default: false
     end
   end
 
@@ -55,8 +56,10 @@ class Chef
       def install_varnish
         package new_resource.package_name do
           action 'install'
-          notifies 'enable', "service[#{new_resource.package_name}]", 'delayed'
-          notifies 'restart', "service[#{new_resource.package_name}]", 'delayed'
+          unless new_resource.no_default_service
+            notifies 'enable', "service[#{new_resource.package_name}]", 'delayed'
+            notifies 'restart', "service[#{new_resource.package_name}]", 'delayed'
+          end
         end
 
         service 'varnish' do
