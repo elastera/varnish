@@ -75,3 +75,8 @@ suites:
   run_list:
     - recipe[install_varnish::install_without_service]
 
+- name: two_instances
+  includes:
+    - centos-6.5
+  run_list:
+    - recipe[install_varnish::two_instances]

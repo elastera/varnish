@@ -17,3 +17,5 @@ depends 'build-essential'
 depends 'chef-sugar'
 depends 'yum', '~> 3.0'
 depends 'yum-epel'
+
+depends 'poise-service'

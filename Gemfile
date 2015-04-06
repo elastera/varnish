@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'halite', github: 'coderanger/halite'
+gem 'poise', github: 'poise/poise'
+gem 'poise-service', github: 'poise/poise-service'
+
 group :lint do
   gem 'foodcritic', '~> 3.0'
   gem 'foodcritic-rackspace-rules'
