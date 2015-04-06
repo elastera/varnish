@@ -10,6 +10,7 @@ class Chef
       attribute :package_name, kind_of: String, default: 'varnish'
       attribute :vendor_repo, kind_of: [TrueClass, FalseClass], default: false
       attribute :vendor_version, kind_of: String, default: '4.0'
+      attribute :no_default_service, kind_of: [TrueClass, FalseClass], default: false
     end
   end
 
@@ -63,12 +64,14 @@ class Chef
 
         pack = package new_resource.package_name do
           action :nothing
-          notifies 'enable', "service[#{new_resource.package_name}]", 'delayed'
-          notifies 'restart', "service[#{new_resource.package_name}]", 'delayed'
+          unless new_resource.no_default_service
+            notifies 'enable', "service[#{new_resource.package_name}]", 'delayed'
+            notifies 'restart', "service[#{new_resource.package_name}]", 'delayed'
+          end
         end
 
         pack.run_action(:install)
-        if pack.updated_by_last_action?
+        if pack.updated_by_last_action? and not new_resource.no_default_service
           svc.run_action(:enable)
           svc.run_action(:restart)
         end
