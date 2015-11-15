@@ -37,6 +37,12 @@ varnish_instance 'default' do
   path_to_secret '/etc/varnish/secret'
 end
 
+varnish_log 'default' do
+  instance_name "default"
+  file_name '/var/log/varnish/default.log'
+  log_format 'varnishlog'
+end
+
 varnish_instance 'alternate' do
   instance_name 'alternate2'
   max_open_files 131_072
@@ -56,4 +62,10 @@ varnish_instance 'alternate' do
              thread_pool_max: '400',
              thread_pool_timeout: '300')
   path_to_secret '/etc/varnish/secret'
+end
+
+varnish_log 'alternate' do
+  instance_name "alternate"
+  file_name '/var/log/varnish/alternate.ncsa.log'
+  log_format 'varnishncsa'
 end
