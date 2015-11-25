@@ -55,7 +55,7 @@ class Chef
         resource.service_name(service_name)
         resource.restart_on_update :immediately
         # service is the PoiseService::Resource object instance.
-        varnish_args = ['/usr/sbin/varnishd']
+        varnish_args = ['/usr/sbin/varnishd', '-F']
         varnish_args << "-a #{new_resource.listen_address}:#{new_resource.listen_port}"
         varnish_args << "-f #{new_resource.path_to_vcl}"
         varnish_args << "-T #{new_resource.admin_listen_address}:#{new_resource.admin_listen_port}"
