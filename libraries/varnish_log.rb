@@ -4,7 +4,6 @@ class Chef
     class VarnishLog < Chef::Resource::LWRPBase
       include PoiseService::ServiceMixin
 
-      self.resource_name = :varnish_log
       default_action [:enable, :start]
 
       attribute :name, kind_of: String, name_attribute: true

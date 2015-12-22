@@ -4,7 +4,7 @@ maintainer_email 'cookbooks@chef.io'
 license 'Apache 2.0'
 description 'Installs and configures varnish'
 #version '2.1.0'
-version '99.0.3'
+version '99.0.4'
 
 recipe 'varnish', 'Installs and configures varnish'
 recipe 'varnish::repo', 'Adds the official varnish project repository'
