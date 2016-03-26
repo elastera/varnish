@@ -33,6 +33,7 @@ class Chef
 
       def action_enable
         if new_resource.logrotate
+          new_resource.pid("/var/run/#{new_resource.log_format}-#{new_resource.instance_name}.pid")
           template "#{new_resource.logrotate_path}/#{new_resource.log_format}" do
             source 'lib_logrotate_varnishlog.erb'
             path "#{new_resource.logrotate_path}/#{new_resource.log_format}"
