@@ -58,7 +58,7 @@ class Chef
         cmd << "-w #{new_resource.file_name}"
         cmd << "-n #{new_resource.instance_name}"
         if new_resource.log_format == "varnishncsa"
-          cmd << "-F #{new_resource.ncsa_format_string}"
+          cmd << "-F '#{new_resource.ncsa_format_string}'"
         end
         cmd << "-P /var/run/#{service_name}.pid"
         service.options(pid_file: "/var/run/#{service_name}.pid")
