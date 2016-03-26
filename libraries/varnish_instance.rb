@@ -1,3 +1,5 @@
+require 'poise_service/service_mixin'
+
 class Chef
   class Resource
     # Configure the Varnish service.
