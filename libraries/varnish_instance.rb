@@ -61,7 +61,7 @@ class Chef
         varnish_args << "-f #{new_resource.path_to_vcl}"
         varnish_args << "-T #{new_resource.admin_listen_address}:#{new_resource.admin_listen_port}"
         if new_resource.version == '4.0'
-          # varnish_args << "-u #{new_resource.user} -g #{new_resource.group}"
+          # The following parameters were removed from varnish 4.1 When using them, the execution will exit with error.
           varnish_args << "-u #{new_resource.user} -g #{new_resource.group}"
         end
         varnish_args << "-t #{new_resource.ttl}"
