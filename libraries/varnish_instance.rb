@@ -36,6 +36,7 @@ class Chef
                                         'thread_pool_max' => '500',
                                         'thread_pool_timeout' => '300' }
       attribute :path_to_secret, kind_of: String, default: '/etc/varnish/secret'
+      attribute :version, kind_of: String, default: '4.0'
     end
   end
 
@@ -59,7 +60,10 @@ class Chef
         varnish_args << "-a #{new_resource.listen_address}:#{new_resource.listen_port}"
         varnish_args << "-f #{new_resource.path_to_vcl}"
         varnish_args << "-T #{new_resource.admin_listen_address}:#{new_resource.admin_listen_port}"
-        varnish_args << "-u #{new_resource.user} -g #{new_resource.group}"
+        if new_resource.version == '4.0'
+          # varnish_args << "-u #{new_resource.user} -g #{new_resource.group}"
+          varnish_args << "-u #{new_resource.user} -g #{new_resource.group}"
+        end
         varnish_args << "-t #{new_resource.ttl}"
         varnish_args << "-n #{new_resource.instance_name}"
         if new_resource.storage == 'file'
